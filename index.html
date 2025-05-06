@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My UX Capstone Project</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #4a6fa5;
+            --secondary-color: #166088;
+            --accent-color: #4fc3f7;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --text-color: #333;
+            --text-light: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .logo span {
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+        
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(74, 111, 165, 0.1) 0%, rgba(22, 96, 136, 0.1) 100%);
+            margin-top: 80px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+            line-height: 1.2;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* About Project Section */
+        #about-project {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* UX Process Section */
+        #ux-process {
+            background-color: var(--light-color);
+        }
+        
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        
+        .process-step {
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .process-step i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        /* Research Section */
+        #research {
+            background-color: white;
+        }
+        
+        .research-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .research-method {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 8px;
+        }
+        
+        .research-method h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .research-method ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .research-method ul li {
+            margin-bottom: 10px;
+        }
+        
+        /* Design Showcase */
+        #design {
+            background-color: var(--light-color);
+        }
+        
+        .design-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .design-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .design-item:hover {
+            transform: scale(1.03);
+        }
+        
+        .design-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .design-caption {
+            padding: 20px;
+        }
+        
+        .design-caption h3 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .design-caption p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        /* Writing Samples */
+        #writing {
+            background-color: white;
+        }
+        
+        .writing-samples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .writing-sample {
+            flex: 1;
+            min-width: 300px;
+            background-color: var(--light-color);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .writing-sample h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .writing-sample p {
+            margin-bottom: 20px;
+        }
+        
+        /* Conclusion Section */
+        #conclusion {
+            background-color: var(--light-color);
+            text-align: center;
+        }
+        
+        .conclusion-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .conclusion-content h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--dark-color);
+        }
+        
+        .conclusion-content p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.5s ease;
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-text, .about-text, .about-image {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">My<span>Capstone</span></a>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about-project">Project</a></li>
+                    <li><a href="#ux-process">Process</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#design">Design</a></li>
+                    <li><a href="#writing">Writing</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>UX Design Capstone Project: Reduce by Reuse</h1>
+                    <p>A comprehensive user experience design project showcasing research, design thinking, and writing skills developed during my capstone experience.</p>
+                    <a href="#about-project" class="btn">Explore My Project</a>
+                    <a href="#design" class="btn btn-outline">View Designs</a>
+                </div>
+                <div class="hero-image">
+                    <img src="updatedlogo.svg" alt="Reduce by Reuse Logo" width="400" height="400">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Project Section -->
+    <section id="about-project">
+        <div class="container">
+            <h2 class="section-title">About The Project</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Reducing electronic waste in student projects</h3>
+                    <p>This capstone project represents the culmination of my studies in UX design, research, and writing. Over the course of 6 months, I identified a real-world problem affecting CU Boulder Students and developed a comprehensive solution through user-centered design methodologies.</p>
+                    <p>The project began with extensive user research to understand pain points and opportunities, followed by iterative design processes including wireframing, prototyping, and usability testing. The final deliverables include a webiste that helps students figure out how to reduce their waste when building projects, and graphic design media campaign.</p>
+                    <p>Through this project, I demonstrated my ability to conduct user research, synthesizing findings, creating design solutions, and lead a team. Poster made by Nita</p>
+                </div>
+                <div class="about-image">
+                    <img src="marketing1.png" alt="Project Overview">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UX Process Section -->
+    <section id="ux-process">
+        <div class="container">
+            <h2 class="section-title">My UX Process</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <i class="fas fa-search"></i>
+                    <h3>Research</h3>
+                    <p>Conducted user interviews, surveys, and competitive analysis to understand user needs and market opportunities.</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Ideation</h3>
+                    <p>Developed user personas, journey maps, and conducted brainstorming sessions to generate design concepts.</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-pencil-ruler"></i>
+                    <h3>Design</h3>
+                    <p>Created wireframes, prototypes, and high-fidelity designs based on research findings and user feedback.</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-vial"></i>
+                    <h3>Testing</h3>
+                    <p>Conducted usability tests with real users to validate designs and identify areas for improvement.</p>
+                </div>
+                <div class="process-step">
+                    <i class="fas fa-file-alt"></i>
+                    <h3>Documentation</h3>
+                    <p>Prepared comprehensive reports, design specifications, and style guides to communicate the solution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <div class="container">
+            <h2 class="section-title">Research & Discovery</h2>
+            <div class="research-methods">
+                <div class="research-method">
+                    <h3>User Research</h3>
+                    <p>To understand the needs and behaviors of our target users, I conducted:</p>
+                    <ul>
+                        <li>10 in-depth user interviews</li>
+                        <li>Contextual inquiry sessions</li>
+                        <li>Resource gathering</li>
+                        <li>Engineering mindset with projects</li>
+                    </ul>
+                    <p>Key findings revealed that students struggled with having time and energy to care about the enviroment and desired creating a project that outlasted them.</p>
+                </div>
+                <div class="research-method">
+                    <h3>Competitive Analysis</h3>
+                    <p>I evaluated 8 engineering disciplines:</p>
+                    <ul>
+                        <li>Everyone follows the design proccess</li>
+                        <li>Dveryone follows proffessors rubrics</li>
+                        <li>No one knows where to go for needed resources</li>
+                    </ul>
+                    <p>This analysis informed our design strategy by designing around the design system and giving many resources.</p>
+                </div>
+                <div class="research-method">
+                    <h3>Key Insights</h3>
+                    <p>Through synthesis of research data, I identified three primary insights:</p>
+                    <ul>
+                        <li>Users needed locations for renewable resources but existing solutions didn't address it well</li>
+                        <li>fatigued casued pollution was more common than expected</li>
+                        <li>Users valued sustainability more above other considerations</li>
+                    </ul>
+                    <p>These insights directly shaped our design priorities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Showcase -->
+    <section id="design">
+        <div class="container">
+            <h2 class="section-title">Design Solutions</h2>
+            <div class="design-gallery">
+                <div class="design-item">
+                    <img src="CUEngineering.png" alt="User Personas">
+                    <div class="design-caption">
+                        <h3>User Personas</h3>
+                        <p>We found our ideal persona to be a CU Engineering student who is going through a class that has an electronic component.</p>
+                    </div>
+                </div>
+                <div class="design-item">
+                    <img src="designSystem.webp" alt="Journey Map">
+                    <div class="design-caption">
+                        <h3>Journey Map</h3>
+                        <p>Visualized the user's experience across touchpoints to identify pain points.</p>
+                    </div>
+                </div>
+                <div class="design-item">
+                    <img src="figmaDesignLow.png" alt="Wireframes">
+                    <div class="design-caption">
+                        <h3>Wireframes</h3>
+                        <p>Low-fidelity layouts exploring information architecture and user flows.</p>
+                    </div>
+                </div>
+                <div class="design-item">
+                    <img src="figmaDesingPrototype.png" alt="Prototypes">
+                    <div class="design-caption">
+                        <h3>Interactive Prototypes</h3>
+                        <p>Clickable prototypes used for usability testing and stakeholder feedback.</p>
+                    </div>
+                </div>
+                <div class="design-item">
+                    <img src="figmaDesignHigh.png" alt="UI Design">
+                    <div class="design-caption">
+                        <h3>UI Design</h3>
+                        <p>High-fidelity visual designs with a cohesive style and branding.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section id="conclusion">
+        <div class="container">
+            <div class="conclusion-content">
+                <h2>Project Outcomes & Reflection</h2>
+                <p>This capstone project resulted in learning about how to work with users, try and find root causes, ux writing, ux research,nd a ux design. The process deepened my understanding of the engineering mindest and demonstrated my ability to lessen the burden sustainability has during intense working time.</p>
+                <p>Key takeaways from this experience include foreplanning is key in sustainability and working with institutions is long and time consuming. Moving forward, I would try and work with institutions in advance and try and gather many different stakeholders into one room. This project has prepared me for future UX work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About This Project</h3>
+                    <p>This capstone project represents my skills in UX design, research, and writing developed through CU Boulder.</p>
+                    <p>All work shown is my original creation excpept for the posters and graphic design.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Me</h3>
+                    <p>Visit my website at https://www.warrensportfolio.com/.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Project Details</h3>
+                    <p><strong>Timeline:</strong> 08/2024 - 05/2025</p>
+                    <p><strong>Tools Used:</strong> Figma, Google, FigJam</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 My Capstone Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add shadow to header on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
